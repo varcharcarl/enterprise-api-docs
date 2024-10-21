@@ -211,7 +211,7 @@ paths:
         200:
           description: Successful response
           schema:
-            $ref: "#/definitions/LearningJourneyReportResponse"
+            $ref: "#/definitions/LearningJourneyOutput"
         500:
           description: Internal Server Error
           schema:
@@ -268,6 +268,57 @@ paths:
           description: Internal Server Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /individual-journey-report:
+    post:
+      tags:
+        - report
+      summary: Get individual journey report
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Individual journey report request body"
+          required: true
+          schema:
+            $ref: "#/definitions/IndividualJourneyInput"
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/IndividualJourneyOutput"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /top-users:
+    post:
+      tags:
+        - report
+      summary: Get top users (overall or monthly)
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Top users report request body"
+          required: true
+          schema:
+            $ref: "#/definitions/UserCompletedCoursesRequest"
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/TopUsersResponse"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
 
 securityDefinitions:
   api_key:
@@ -407,6 +458,7 @@ definitions:
       user_id:
         type: "string"
         example: "olaniyi.ajayi@we45.com"
+
   UserCompletedCoursesResponse:
     type: "object"
     properties:
@@ -444,6 +496,7 @@ definitions:
             start_date:
               type: "string"
               format: "date"
+
   ErrorResponse:
     type: "object"
     properties:
@@ -453,12 +506,14 @@ definitions:
         type: "boolean"
       message:
         type: "string"
+
   UserActiveCoursesRequest:
     type: "object"
     properties:
       user_id:
         type: "string"
         example: "olaniyi.ajayi@we45.com"
+
   UserActiveCoursesResponse:
     type: "object"
     properties:
@@ -496,12 +551,14 @@ definitions:
             start_date:
               type: "string"
               format: "date"
+
   CompanyStatsRequest:
     type: "object"
     properties:
       user_id:
         type: "string"
         example: "olaniyi.ajayi@we45.com"
+
   CompanyStatsResponse:
     type: "object"
     properties:
@@ -526,6 +583,7 @@ definitions:
               type: "integer"
             email:
               type: "string"
+
   TeamStatsRequest:
     type: "object"
     properties:
@@ -535,6 +593,7 @@ definitions:
       select:
         type: "string"
         example: "overall"
+
   ProficiencyReportResponse:
     type: "object"
     properties:
@@ -560,36 +619,6 @@ definitions:
                     type: "string"
                   enroll_count:
                     type: "integer"
-  LearningJourneyReportResponse:
-    type: "object"
-    properties:
-      success:
-        type: "boolean"
-      data:
-        type: "array"
-        items:
-          type: "object"
-          properties:
-            journey_id:
-              type: "string"
-            enroll_count:
-              type: "integer"
-            journey:
-              type: "object"
-              properties:
-                proficiency:
-                  type: "string"
-                sk:
-                  type: "string"
-                description:
-                  type: "string"
-                logo:
-                  type: "string"
-                  format: "url"
-                duration:
-                  type: "integer"
-                name:
-                  type: "string"
 
   TeamStatResponse:
     type: object
@@ -770,6 +799,7 @@ definitions:
       limit:
         type: integer
         description: Maximum number of records to return.
+
   LearningJourneyOutput:
     type: object
     properties:
@@ -820,36 +850,188 @@ definitions:
   UserReport:
     type: object
     properties:
-      challenges_completed:
-        type: integer
-      labs_completed:
-        type: number
-      videos_completed:
-        type: number
-      badges:
-        type: number
-      total_enrolled:
-        type: integer
-      dashboard:
-        type: array
-        items:
-          type: object
+      success:
+        type: boolean
+      error:
+        type: boolean
+      data:
+        type: object
           properties:
-            activity:
-              type: integer
-            date:
-              type: string
-              format: date
-      total_lab_mins:
-        type: number
-      total_course_mins:
-        type: number
-      total_course_minutes:
-        type: number
-      month_lab_minutes:
+          challenges_completed:
+            type: integer
+          labs_completed:
+            type: number
+          videos_completed:
+            type: number
+          badges:
+            type: number
+          total_enrolled:
+            type: integer
+          dashboard:
+            type: array
+            items:
+              type: object
+              properties:
+                activity:
+                  type: integer
+                date:
+                  type: string
+                  format: date
+          total_lab_mins:
+            type: number
+          total_course_mins:
+            type: number
+          total_course_minutes:
+            type: number
+          month_lab_minutes:
+            type: integer
+          total_lab_minutes:
+            type: number
+
+  IndividualJourneyInput:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Journey ID
+      skip:
         type: integer
-      total_lab_minutes:
-        type: number
+        description: Number of records to skip
+      limit:
+        type: integer
+        description: Maximum number of records to return
+
+  IndividualJourneyOutput:
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          ttl:
+            type: integer
+          search_name:
+            type: string
+          logo:
+            type: string
+            format: url
+          name:
+            type: string
+          active:
+            type: boolean
+          roles:
+            type: array
+            items:
+              type: string
+          events:
+            type: array
+            items:
+              type: string
+          delivery_id:
+            type: string
+          proficiency:
+            type: string
+          sk:
+            type: string
+          description:
+            type: string
+          pk:
+            type: string
+          duration:
+            type: integer
+          created_on:
+            type: string
+            format: date-time
+          report:
+            type: object
+            properties:
+              avg_user_progress:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                    avg_progress:
+                      type: number
+                      format: float
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+              avg_progress:
+                type: number
+                format: float
+              avg_course_progress:
+                type: object
+                additionalProperties:
+                  type: number
+                  format: float
+              completed:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                    completed_courses:
+                      type: integer
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+          skills:
+            type: array
+            items:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date
+                topTag:
+                  type: string
+                count:
+                  type: integer
+      success:
+        type: boolean
+      error:
+        type: boolean
+
+  TopUsersResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+      data:
+        type: object
+        properties:
+          data:
+            type: array
+            items:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                lab_minutes:
+                  type: number
+                  nullable: true
+                assignments_completed:
+                  type: integer
+                  nullable: true
+                course_minutes:
+                  type: integer
+                email:
+                  type: string
+                challenge_completed:
+                  type: integer
+                  nullable: true
+          badges:
+            type: integer
+          total:
+            type: integer
 
 externalDocs:
   description: "Find out more about Swagger"
