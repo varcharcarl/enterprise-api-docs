@@ -57,7 +57,6 @@ paths:
       responses:
         "200":
           description: Successful response
-          description: "successful operation"
           schema:
             $ref: "#/definitions/UserCompletedCoursesResponse"
           # content:
