@@ -262,8 +262,6 @@ paths:
       responses:
         200:
           description: Successful response
-          schema:
-            $ref: "#/definitions/UserReport"
         500:
           description: Internal Server Error
           schema:
@@ -847,46 +845,46 @@ definitions:
               type: string
               format: date
 
-  UserReport:
-    type: object
-    properties:
-      success:
-        type: boolean
-      error:
-        type: boolean
-      data:
-        type: object
-        properties:
-          challenges_completed:
-            type: integer
-          labs_completed:
-            type: number
-          videos_completed:
-            type: number
-          badges:
-            type: number
-          total_enrolled:
-            type: integer
-          dashboard:
-            type: array
-            items:
-              type: object
-              properties:
-                activity:
-                  type: integer
-                date:
-                  type: string
-                  format: date
-          total_lab_mins:
-            type: number
-          total_course_mins:
-            type: number
-          total_course_minutes:
-            type: number
-          month_lab_minutes:
-            type: integer
-          total_lab_minutes:
-            type: number
+  # UserReport:
+  #   type: object
+  #   properties:
+  #     success:
+  #       type: boolean
+  #     error:
+  #       type: boolean
+  #     data:
+  #       type: object
+  #       properties:
+  #         challenges_completed:
+  #           type: integer
+  #         labs_completed:
+  #           type: number
+  #         videos_completed:
+  #           type: number
+  #         badges:
+  #           type: number
+  #         total_enrolled:
+  #           type: integer
+  #         dashboard:
+  #           type: array
+  #           items:
+  #             type: object
+  #             properties:
+  #               activity:
+  #                 type: integer
+  #               date:
+  #                 type: string
+  #                 format: date
+  #         total_lab_mins:
+  #           type: number
+  #         total_course_mins:
+  #           type: number
+  #         total_course_minutes:
+  #           type: number
+  #         month_lab_minutes:
+  #           type: integer
+  #         total_lab_minutes:
+  #           type: number
 
   IndividualJourneyInput:
     type: object
