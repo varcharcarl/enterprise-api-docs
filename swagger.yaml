@@ -36,19 +36,34 @@ paths:
       tags:
         - report
       summary: Get completed courses and assignments by user ID
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/definitions/UserCompletedCoursesRequest"
+      description: "Get the list of completed courses for selected user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "email of the user for which completed courses should be listed"
+          required: true
+          schema:
+            $ref: "#/definitions/UserCompletedCoursesRequest"
+      # requestBody:
+      #   required: true
+      #   content:
+      #     application/json:
+      #       schema:
+      #         $ref: "#/definitions/UserCompletedCoursesRequest"
       responses:
         "200":
           description: Successful response
-          content:
-            application/json:
-              schema:
-                $ref: "#/definitions/UserCompletedCoursesResponse"
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/UserCompletedCoursesResponse"
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: "#/definitions/UserCompletedCoursesResponse"
   /user-active-courses:
     post:
       tags:
