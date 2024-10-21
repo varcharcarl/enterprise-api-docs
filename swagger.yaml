@@ -1,7 +1,8 @@
 ---
 swagger: "2.0"
 info:
-  description: "This is a sample server Petstore server.  You can find out more about\
+  description:
+    "This is a sample server Petstore server.  You can find out more about\
     \ Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).\
     \  For this sample, you can use the api key `special-key` to test the authorization\
     \ filters."
@@ -16,105 +17,970 @@ info:
 host: "petstore.swagger.io"
 basePath: "/v2"
 tags:
-- name: "pet"
-  description: "Everything about your Pets"
-  externalDocs:
-    description: "Find out more"
-    url: "http://swagger.io"
-- name: "store"
-  description: "Access to Petstore orders"
-- name: "user"
-  description: "Operations about user"
-  externalDocs:
-    description: "Find out more about our store"
-    url: "http://swagger.io"
+  - name: "pet"
+    description: "Everything about your Pets"
+    externalDocs:
+      description: "Find out more"
+      url: "http://swagger.io"
+  - name: "store"
+    description: "Access to Petstore orders"
+  - name: "user"
+    description: "Operations about user"
+    externalDocs:
+      description: "Find out more about our store"
+      url: "http://swagger.io"
 schemes:
-- "https"
-- "http"
+  - "https"
+  - "http"
 paths:
+  /user-completed-courses:
+    post:
+      tags:
+        - report
+      summary: Get completed courses and assignments by user ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  example: olaniyi.ajayi@we45.com
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  error:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        event_name:
+                          type: string
+                        sk:
+                          type: string
+                        vid_duration:
+                          type: number
+                          format: float
+                        lab_duration:
+                          type: number
+                          format: float
+                  assignments:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        sk:
+                          type: string
+                        end_date:
+                          type: string
+                          format: date
+                        name:
+                          type: string
+                        start_date:
+                          type: string
+                          format: date
+  /user-active-courses:
+    post:
+      tags:
+        - report
+      summary: Get active courses and assignments by user ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  example: olaniyi.ajayi@we45.com
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  error:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        event_name:
+                          type: string
+                        sk:
+                          type: string
+                        vid_duration:
+                          type: number
+                          format: float
+                        lab_duration:
+                          type: number
+                          format: float
+                  assignments:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        sk:
+                          type: string
+                        end_date:
+                          type: string
+                          format: date
+                        name:
+                          type: string
+                        start_date:
+                          type: string
+                          format: date
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    type: boolean
+                    example: true
+                  message:
+                    type: object
+  /company-stats:
+    post:
+      tags:
+        - report
+      summary: Get company user statistics by user ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  example: olaniyi.ajayi@we45.com
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+                        video_count:
+                          type: integer
+                        lab_count:
+                          type: integer
+                        media_count:
+                          type: integer
+                        quiz_count:
+                          type: integer
+                        email:
+                          type: string
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    type: boolean
+                    example: true
+                  message:
+                    type: object
+  /team-stats:
+    post:
+      tags:
+        - report
+      summary: Get team statistics
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team_id:
+                  type: string
+                  example: team_062c0918-e7eb-40e0-af3b-ecdca8b91f9f
+                select:
+                  type: string
+                  example: overall
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      activity:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            activity:
+                              type: integer
+                            date:
+                              type: string
+                              format: date
+                      progress:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            course:
+                              type: string
+                            averageProgress:
+                              type: number
+                              format: float
+                            duration:
+                              type: number
+                              format: float
+                      assignments:
+                        type: array
+                        items:
+                          # Define assignment object if needed
+                          type: object
+                      assign_completed:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            assign:
+                              type: object
+                              properties:
+                                sk:
+                                  type: string
+                                end_date:
+                                  type: string
+                                  format: date
+                                name:
+                                  type: string
+                                start_date:
+                                  type: string
+                                  format: date
+                            users:
+                              type: array
+                              items:
+                                type: string
+                      stat:
+                        type: object
+                        properties:
+                          assignments_completed:
+                            type: number
+                            format: float
+                          badges:
+                            type: integer
+                          challenges_completed:
+                            type: number
+                            format: float
+                          doc_type:
+                            type: string
+                          enrolled:
+                            type: number
+                            format: float
+                          lab_minutes:
+                            type: number
+                            format: float
+                          labs_completed:
+                            type: number
+                            format: float
+                          video_minutes:
+                            type: number
+                            format: float
+                          videos_completed:
+                            type: number
+                            format: float
+                      recent:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            activity:
+                              type: string
+                            item:
+                              type: string
+                            date:
+                              type: string
+
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            first_name:
+                              type: string
+                            last_name:
+                              type: string
+                            lab_minutes:
+                              type: number
+                              format: float
+                            course_minutes:
+                              type: number
+                              format: float
+                            email:
+                              type: string
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    type: boolean
+                    example: true
+                  message:
+                    type: object
+  /proficiency-report:
+    post:
+      tags:
+        - report
+      summary: Get proficiency report
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        total_enroll_count:
+                          type: integer
+                        courses:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              event_name:
+                                type: string
+                              enroll_count:
+                                type: integer
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    type: boolean
+                    example: true
+                  message:
+                    type: object
+  /lp-report:
+    post:
+      tags:
+        - report
+      summary: Get learning path report
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+                  error:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      lab_duration:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            lpId:
+                              type: string
+                            learning_path_name:
+                              type: string
+                            lab_duration:
+                              type: number
+                              format: float
+                      vid_duration:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            lpId:
+                              type: string
+                            learning_path_name:
+                              type: string
+                            vid_duration:
+                              type: number
+                              format: float
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    type: boolean
+                    example: true
+                  message:
+                    type: object
+  /lp-completed-report:
+    post:
+      tags:
+        - report
+      summary: Get learning path completed report
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        completed_count:
+                          type: number
+                          format: float
+                        lp:
+                          type: string
+                        learning_path_name:
+                          type: string
+                          nullable: true
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    type: boolean
+                    example: true
+                  message:
+                    type: object
+  /journey-report:
+    post:
+      tags:
+        - report
+      summary: Get journey report
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                skip:
+                  type: integer
+                  description: Number of records to skip.
+                limit:
+                  type: integer
+                  description: Maximum number of records to return.
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        journey_id:
+                          type: string
+                        enroll_count:
+                          type: integer
+                        journey:
+                          type: object
+                          properties:
+                            proficiency:
+                              type: string
+                            sk:
+                              type: string
+                            description:
+                              type: string
+                            logo:
+                              type: string
+                              format: url
+                            duration:
+                              type: integer
+                            name:
+                              type: string
+                  error:
+                    type: boolean
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    type: boolean
+                    example: true
+                  message:
+                    type: object
+  /user-activity:
+    post:
+      tags:
+        - report
+      summary: Get user activity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  format: email
+                  description: User's email address.
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        activity:
+                          type: integer
+                        date:
+                          type: string
+                          format: date
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    type: boolean
+                    example: true
+                  message:
+                    type: object
+  /individual-journey-report:
+    post:
+      tags:
+        - report
+      summary: Get individual journey report
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Journey ID
+                skip:
+                  type: integer
+                  description: Number of records to skip
+                limit:
+                  type: integer
+                  description: Maximum number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      ttl:
+                        type: integer
+                      search_name:
+                        type: string
+                      logo:
+                        type: string
+                        format: url
+                      name:
+                        type: string
+                      active:
+                        type: boolean
+                      roles:
+                        type: array
+                        items:
+                          type: string
+                      events:
+                        type: array
+                        items:
+                          type: string
+                      delivery_id:
+                        type: string
+                      proficiency:
+                        type: string
+                      sk:
+                        type: string
+                      description:
+                        type: string
+                      pk:
+                        type: string
+                      duration:
+                        type: integer
+                      created_on:
+                        type: string
+                        format: date-time
+                      report:
+                        type: object
+                        properties:
+                          avg_user_progress:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                email:
+                                  type: string
+                                  format: email
+                                avg_progress:
+                                  type: number
+                                  format: float
+                                first_name:
+                                  type: string
+                                last_name:
+                                  type: string
+                          avg_progress:
+                            type: number
+                            format: float
+                          avg_course_progress:
+                            type: object
+                            additionalProperties:
+                              type: number
+                              format: float
+                          completed:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                email:
+                                  type: string
+                                  format: email
+                                completed_courses:
+                                  type: integer
+                                first_name:
+                                  type: string
+                                last_name:
+                                  type: string
+                      skills:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                              format: date
+                            topTag:
+                              type: string
+                            count:
+                              type: integer
+                  success:
+                    type: boolean
+                  error:
+                    type: boolean
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    type: boolean
+                    example: true
+                  message:
+                    type: object
+  /top-users:
+    post:
+      tags:
+        - report
+      summary: Get top users (overall or monthly)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                select:
+                  type: string
+                  enum: [overall, monthly]
+                  description: Select top users overall or monthly
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            first_name:
+                              type: string
+                            last_name:
+                              type: string
+                            lab_minutes:
+                              type: number
+                              nullable: true
+                            assignments_completed:
+                              type: integer
+                              nullable: true
+                            course_minutes:
+                              type: integer
+                            email:
+                              type: string
+                            challenge_completed:
+                              type: integer
+                              nullable: true
+                      badges:
+                        type: integer
+                      total:
+                        type: integer
+  /user-report:
+    post:
+      tags:
+        - report
+      summary: Get user report
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  format: email
+                  description: User email
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  challenges_completed:
+                    type: integer
+                  labs_completed:
+                    type: number
+                  videos_completed:
+                    type: number
+                  badges:
+                    type: number
+                  total_enrolled:
+                    type: integer
+                  dashboard:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        activity:
+                          type: integer
+                        date:
+                          type: string
+                          format: date
+                  total_lab_mins:
+                    type: number
+                  total_course_mins:
+                    type: number
+                  total_course_minutes:
+                    type: number
+                  month_lab_minutes:
+                    type: integer
+                  total_lab_minutes:
+                    type: number
+
   /pet/{petId}/uploadImage:
     post:
       tags:
-      - "pet"
+        - "pet"
       summary: "uploads an image"
       description: ""
       operationId: "uploadFile"
       consumes:
-      - "multipart/form-data"
+        - "multipart/form-data"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "petId"
-        in: "path"
-        description: "ID of pet to update"
-        required: true
-        type: "integer"
-        format: "int64"
-      - name: "additionalMetadata"
-        in: "formData"
-        description: "Additional data to pass to server"
-        required: false
-        type: "string"
-      - name: "file"
-        in: "formData"
-        description: "file to upload"
-        required: false
-        type: "file"
+        - name: "petId"
+          in: "path"
+          description: "ID of pet to update"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "additionalMetadata"
+          in: "formData"
+          description: "Additional data to pass to server"
+          required: false
+          type: "string"
+        - name: "file"
+          in: "formData"
+          description: "file to upload"
+          required: false
+          type: "file"
       responses:
         200:
           description: "successful operation"
           schema:
             $ref: "#/definitions/ApiResponse"
       security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
+        - petstore_auth:
+            - "write:pets"
+            - "read:pets"
   /pet:
     post:
       tags:
-      - "pet"
+        - "pet"
       summary: "Add a new pet to the store"
       description: ""
       operationId: "addPet"
       consumes:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
+        - in: "body"
+          name: "body"
+          description: "Pet object that needs to be added to the store"
+          required: true
+          schema:
+            $ref: "#/definitions/Pet"
       responses:
         405:
           description: "Invalid input"
       security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
+        - petstore_auth:
+            - "write:pets"
+            - "read:pets"
     put:
       tags:
-      - "pet"
+        - "pet"
       summary: "Update an existing pet"
       description: ""
       operationId: "updatePet"
       consumes:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
+        - in: "body"
+          name: "body"
+          description: "Pet object that needs to be added to the store"
+          required: true
+          schema:
+            $ref: "#/definitions/Pet"
       responses:
         400:
           description: "Invalid ID supplied"
@@ -123,33 +989,33 @@ paths:
         405:
           description: "Validation exception"
       security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
+        - petstore_auth:
+            - "write:pets"
+            - "read:pets"
   /pet/findByStatus:
     get:
       tags:
-      - "pet"
+        - "pet"
       summary: "Finds Pets by status"
       description: "Multiple status values can be provided with comma separated strings"
       operationId: "findPetsByStatus"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - name: "status"
-        in: "query"
-        description: "Status values that need to be considered for filter"
-        required: true
-        type: "array"
-        items:
-          type: "string"
-          enum:
-          - "available"
-          - "pending"
-          - "sold"
-          default: "available"
-        collectionFormat: "multi"
+        - name: "status"
+          in: "query"
+          description: "Status values that need to be considered for filter"
+          required: true
+          type: "array"
+          items:
+            type: "string"
+            enum:
+              - "available"
+              - "pending"
+              - "sold"
+            default: "available"
+          collectionFormat: "multi"
       responses:
         200:
           description: "successful operation"
@@ -160,29 +1026,30 @@ paths:
         400:
           description: "Invalid status value"
       security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
+        - petstore_auth:
+            - "write:pets"
+            - "read:pets"
   /pet/findByTags:
     get:
       tags:
-      - "pet"
+        - "pet"
       summary: "Finds Pets by tags"
-      description: "Multiple tags can be provided with comma separated strings. Use\
+      description:
+        "Multiple tags can be provided with comma separated strings. Use\
         \ tag1, tag2, tag3 for testing."
       operationId: "findPetsByTags"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - name: "tags"
-        in: "query"
-        description: "Tags to filter by"
-        required: true
-        type: "array"
-        items:
-          type: "string"
-        collectionFormat: "multi"
+        - name: "tags"
+          in: "query"
+          description: "Tags to filter by"
+          required: true
+          type: "array"
+          items:
+            type: "string"
+          collectionFormat: "multi"
       responses:
         200:
           description: "successful operation"
@@ -193,27 +1060,27 @@ paths:
         400:
           description: "Invalid tag value"
       security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
+        - petstore_auth:
+            - "write:pets"
+            - "read:pets"
       deprecated: true
   /pet/{petId}:
     get:
       tags:
-      - "pet"
+        - "pet"
       summary: "Find pet by ID"
       description: "Returns a single pet"
       operationId: "getPetById"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - name: "petId"
-        in: "path"
-        description: "ID of pet to return"
-        required: true
-        type: "integer"
-        format: "int64"
+        - name: "petId"
+          in: "path"
+          description: "ID of pet to return"
+          required: true
+          type: "integer"
+          format: "int64"
       responses:
         200:
           description: "successful operation"
@@ -224,90 +1091,90 @@ paths:
         404:
           description: "Pet not found"
       security:
-      - api_key: []
+        - api_key: []
     post:
       tags:
-      - "pet"
+        - "pet"
       summary: "Updates a pet in the store with form data"
       description: ""
       operationId: "updatePetWithForm"
       consumes:
-      - "application/x-www-form-urlencoded"
+        - "application/x-www-form-urlencoded"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - name: "petId"
-        in: "path"
-        description: "ID of pet that needs to be updated"
-        required: true
-        type: "integer"
-        format: "int64"
-      - name: "name"
-        in: "formData"
-        description: "Updated name of the pet"
-        required: false
-        type: "string"
-      - name: "status"
-        in: "formData"
-        description: "Updated status of the pet"
-        required: false
-        type: "string"
+        - name: "petId"
+          in: "path"
+          description: "ID of pet that needs to be updated"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "name"
+          in: "formData"
+          description: "Updated name of the pet"
+          required: false
+          type: "string"
+        - name: "status"
+          in: "formData"
+          description: "Updated status of the pet"
+          required: false
+          type: "string"
       responses:
         405:
           description: "Invalid input"
       security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
+        - petstore_auth:
+            - "write:pets"
+            - "read:pets"
     delete:
       tags:
-      - "pet"
+        - "pet"
       summary: "Deletes a pet"
       description: ""
       operationId: "deletePet"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - name: "api_key"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "petId"
-        in: "path"
-        description: "Pet id to delete"
-        required: true
-        type: "integer"
-        format: "int64"
+        - name: "api_key"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "petId"
+          in: "path"
+          description: "Pet id to delete"
+          required: true
+          type: "integer"
+          format: "int64"
       responses:
         400:
           description: "Invalid ID supplied"
         404:
           description: "Pet not found"
       security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
+        - petstore_auth:
+            - "write:pets"
+            - "read:pets"
   /store/order:
     post:
       tags:
-      - "store"
+        - "store"
       summary: "Place an order for a pet"
       description: ""
       operationId: "placeOrder"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "order placed for purchasing the pet"
-        required: true
-        schema:
-          $ref: "#/definitions/Order"
+        - in: "body"
+          name: "body"
+          description: "order placed for purchasing the pet"
+          required: true
+          schema:
+            $ref: "#/definitions/Order"
       responses:
         200:
           description: "successful operation"
@@ -318,23 +1185,24 @@ paths:
   /store/order/{orderId}:
     get:
       tags:
-      - "store"
+        - "store"
       summary: "Find purchase order by ID"
-      description: "For valid response try integer IDs with value >= 1 and <= 10.\
+      description:
+        "For valid response try integer IDs with value >= 1 and <= 10.\
         \ Other values will generated exceptions"
       operationId: "getOrderById"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - name: "orderId"
-        in: "path"
-        description: "ID of pet that needs to be fetched"
-        required: true
-        type: "integer"
-        maximum: 10
-        minimum: 1
-        format: "int64"
+        - name: "orderId"
+          in: "path"
+          description: "ID of pet that needs to be fetched"
+          required: true
+          type: "integer"
+          maximum: 10
+          minimum: 1
+          format: "int64"
       responses:
         200:
           description: "successful operation"
@@ -346,22 +1214,23 @@ paths:
           description: "Order not found"
     delete:
       tags:
-      - "store"
+        - "store"
       summary: "Delete purchase order by ID"
-      description: "For valid response try integer IDs with positive integer value.\
+      description:
+        "For valid response try integer IDs with positive integer value.\
         \ Negative or non-integer values will generate API errors"
       operationId: "deleteOrder"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - name: "orderId"
-        in: "path"
-        description: "ID of the order that needs to be deleted"
-        required: true
-        type: "integer"
-        minimum: 1
-        format: "int64"
+        - name: "orderId"
+          in: "path"
+          description: "ID of the order that needs to be deleted"
+          required: true
+          type: "integer"
+          minimum: 1
+          format: "int64"
       responses:
         400:
           description: "Invalid ID supplied"
@@ -370,12 +1239,12 @@ paths:
   /store/inventory:
     get:
       tags:
-      - "store"
+        - "store"
       summary: "Returns pet inventories by status"
       description: "Returns a map of status codes to quantities"
       operationId: "getInventory"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -386,71 +1255,71 @@ paths:
               type: "integer"
               format: "int32"
       security:
-      - api_key: []
+        - api_key: []
   /user/createWithArray:
     post:
       tags:
-      - "user"
+        - "user"
       summary: "Creates list of users with given input array"
       description: ""
       operationId: "createUsersWithArrayInput"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "List of user object"
-        required: true
-        schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/User"
+        - in: "body"
+          name: "body"
+          description: "List of user object"
+          required: true
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
       responses:
         default:
           description: "successful operation"
   /user/createWithList:
     post:
       tags:
-      - "user"
+        - "user"
       summary: "Creates list of users with given input array"
       description: ""
       operationId: "createUsersWithListInput"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "List of user object"
-        required: true
-        schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/User"
+        - in: "body"
+          name: "body"
+          description: "List of user object"
+          required: true
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
       responses:
         default:
           description: "successful operation"
   /user/{username}:
     get:
       tags:
-      - "user"
+        - "user"
       summary: "Get user by user name"
       description: ""
       operationId: "getUserByName"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - name: "username"
-        in: "path"
-        description: "The name that needs to be fetched. Use user1 for testing. "
-        required: true
-        type: "string"
+        - name: "username"
+          in: "path"
+          description: "The name that needs to be fetched. Use user1 for testing. "
+          required: true
+          type: "string"
       responses:
         200:
           description: "successful operation"
@@ -462,27 +1331,27 @@ paths:
           description: "User not found"
     put:
       tags:
-      - "user"
+        - "user"
       summary: "Updated user"
       description: "This can only be done by the logged in user."
       operationId: "updateUser"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - name: "username"
-        in: "path"
-        description: "name that need to be updated"
-        required: true
-        type: "string"
-      - in: "body"
-        name: "body"
-        description: "Updated user object"
-        required: true
-        schema:
-          $ref: "#/definitions/User"
+        - name: "username"
+          in: "path"
+          description: "name that need to be updated"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "Updated user object"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
       responses:
         400:
           description: "Invalid user supplied"
@@ -490,19 +1359,19 @@ paths:
           description: "User not found"
     delete:
       tags:
-      - "user"
+        - "user"
       summary: "Delete user"
       description: "This can only be done by the logged in user."
       operationId: "deleteUser"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - name: "username"
-        in: "path"
-        description: "The name that needs to be deleted"
-        required: true
-        type: "string"
+        - name: "username"
+          in: "path"
+          description: "The name that needs to be deleted"
+          required: true
+          type: "string"
       responses:
         400:
           description: "Invalid username supplied"
@@ -511,24 +1380,24 @@ paths:
   /user/login:
     get:
       tags:
-      - "user"
+        - "user"
       summary: "Logs user into the system"
       description: ""
       operationId: "loginUser"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - name: "username"
-        in: "query"
-        description: "The user name for login"
-        required: true
-        type: "string"
-      - name: "password"
-        in: "query"
-        description: "The password for login in clear text"
-        required: true
-        type: "string"
+        - name: "username"
+          in: "query"
+          description: "The user name for login"
+          required: true
+          type: "string"
+        - name: "password"
+          in: "query"
+          description: "The password for login in clear text"
+          required: true
+          type: "string"
       responses:
         200:
           description: "successful operation"
@@ -548,13 +1417,13 @@ paths:
   /user/logout:
     get:
       tags:
-      - "user"
+        - "user"
       summary: "Logs out current logged in user session"
       description: ""
       operationId: "logoutUser"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters: []
       responses:
         default:
@@ -562,22 +1431,22 @@ paths:
   /user:
     post:
       tags:
-      - "user"
+        - "user"
       summary: "Create user"
       description: "This can only be done by the logged in user."
       operationId: "createUser"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
-      - "application/xml"
+        - "application/json"
+        - "application/xml"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Created user object"
-        required: true
-        schema:
-          $ref: "#/definitions/User"
+        - in: "body"
+          name: "body"
+          description: "Created user object"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
       responses:
         default:
           description: "successful operation"
@@ -617,8 +1486,8 @@ definitions:
   Pet:
     type: "object"
     required:
-    - "name"
-    - "photoUrls"
+      - "name"
+      - "photoUrls"
     properties:
       id:
         type: "integer"
@@ -648,9 +1517,9 @@ definitions:
         type: "string"
         description: "pet status in the store"
         enum:
-        - "available"
-        - "pending"
-        - "sold"
+          - "available"
+          - "pending"
+          - "sold"
     xml:
       name: "Pet"
   Tag:
@@ -682,9 +1551,9 @@ definitions:
         type: "string"
         description: "Order Status"
         enum:
-        - "placed"
-        - "approved"
-        - "delivered"
+          - "placed"
+          - "approved"
+          - "delivered"
       complete:
         type: "boolean"
     xml:
