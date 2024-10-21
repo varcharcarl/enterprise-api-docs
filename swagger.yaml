@@ -1,11 +1,7 @@
 ---
 swagger: "2.0"
 info:
-  description:
-    "This is a sample server Petstore server.  You can find out more about\
-    \ Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).\
-    \  For this sample, you can use the api key `special-key` to test the authorization\
-    \ filters."
+  description: "This is a sample server Petstore server. You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/). For this sample, you can use the api key `special-key` to test the authorization filters."
   version: "1.0.5"
   title: "Swagger Petstore"
   termsOfService: "http://swagger.io/terms/"
@@ -29,6 +25,8 @@ tags:
     externalDocs:
       description: "Find out more about our store"
       url: "http://swagger.io"
+  - name: "report"
+    description: "Various reports"
 schemes:
   - "https"
   - "http"
@@ -43,53 +41,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                user_id:
-                  type: string
-                  example: olaniyi.ajayi@we45.com
+              $ref: "#/definitions/UserCompletedCoursesRequest"
       responses:
         "200":
           description: Successful response
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  error:
-                    type: boolean
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        event_name:
-                          type: string
-                        sk:
-                          type: string
-                        vid_duration:
-                          type: number
-                          format: float
-                        lab_duration:
-                          type: number
-                          format: float
-                  assignments:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        sk:
-                          type: string
-                        end_date:
-                          type: string
-                          format: date
-                        name:
-                          type: string
-                        start_date:
-                          type: string
-                          format: date
+                $ref: "#/definitions/UserCompletedCoursesResponse"
   /user-active-courses:
     post:
       tags:
@@ -100,68 +59,20 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                user_id:
-                  type: string
-                  example: olaniyi.ajayi@we45.com
+              $ref: "#/definitions/UserActiveCoursesRequest"
       responses:
         "200":
           description: Successful response
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  error:
-                    type: boolean
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        event_name:
-                          type: string
-                        sk:
-                          type: string
-                        vid_duration:
-                          type: number
-                          format: float
-                        lab_duration:
-                          type: number
-                          format: float
-                  assignments:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        sk:
-                          type: string
-                        end_date:
-                          type: string
-                          format: date
-                        name:
-                          type: string
-                        start_date:
-                          type: string
-                          format: date
+                $ref: "#/definitions/UserActiveCoursesResponse"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: boolean
-                    example: true
-                  message:
-                    type: object
+                $ref: "#/definitions/ErrorResponse"
   /company-stats:
     post:
       tags:
@@ -172,55 +83,20 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                user_id:
-                  type: string
-                  example: olaniyi.ajayi@we45.com
+              $ref: "#/definitions/CompanyStatsRequest"
       responses:
         "200":
           description: Successful response
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        first_name:
-                          type: string
-                        last_name:
-                          type: string
-                        video_count:
-                          type: integer
-                        lab_count:
-                          type: integer
-                        media_count:
-                          type: integer
-                        quiz_count:
-                          type: integer
-                        email:
-                          type: string
+                $ref: "#/definitions/CompanyStatsResponse"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: boolean
-                    example: true
-                  message:
-                    type: object
+                $ref: "#/definitions/ErrorResponse"
   /team-stats:
     post:
       tags:
@@ -231,149 +107,20 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                team_id:
-                  type: string
-                  example: team_062c0918-e7eb-40e0-af3b-ecdca8b91f9f
-                select:
-                  type: string
-                  example: overall
+              $ref: "#/definitions/TeamStatsRequest"
       responses:
         "200":
           description: Successful response
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  data:
-                    type: object
-                    properties:
-                      activity:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            activity:
-                              type: integer
-                            date:
-                              type: string
-                              format: date
-                      progress:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            course:
-                              type: string
-                            averageProgress:
-                              type: number
-                              format: float
-                            duration:
-                              type: number
-                              format: float
-                      assignments:
-                        type: array
-                        items:
-                          # Define assignment object if needed
-                          type: object
-                      assign_completed:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            assign:
-                              type: object
-                              properties:
-                                sk:
-                                  type: string
-                                end_date:
-                                  type: string
-                                  format: date
-                                name:
-                                  type: string
-                                start_date:
-                                  type: string
-                                  format: date
-                            users:
-                              type: array
-                              items:
-                                type: string
-                      stat:
-                        type: object
-                        properties:
-                          assignments_completed:
-                            type: number
-                            format: float
-                          badges:
-                            type: integer
-                          challenges_completed:
-                            type: number
-                            format: float
-                          doc_type:
-                            type: string
-                          enrolled:
-                            type: number
-                            format: float
-                          lab_minutes:
-                            type: number
-                            format: float
-                          labs_completed:
-                            type: number
-                            format: float
-                          video_minutes:
-                            type: number
-                            format: float
-                          videos_completed:
-                            type: number
-                            format: float
-                      recent:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            activity:
-                              type: string
-                            item:
-                              type: string
-                            date:
-                              type: string
-
-                      items:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            first_name:
-                              type: string
-                            last_name:
-                              type: string
-                            lab_minutes:
-                              type: number
-                              format: float
-                            course_minutes:
-                              type: number
-                              format: float
-                            email:
-                              type: string
+                $ref: "#/definitions/TeamStatsResponse"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: boolean
-                    example: true
-                  message:
-                    type: object
+                $ref: "#/definitions/ErrorResponse"
   /proficiency-report:
     post:
       tags:
@@ -385,45 +132,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                  success:
-                    type: boolean
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                        total_enroll_count:
-                          type: integer
-                        courses:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              event_name:
-                                type: string
-                              enroll_count:
-                                type: integer
+                $ref: "#/definitions/ProficiencyReportResponse"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: boolean
-                    example: true
-                  message:
-                    type: object
+                $ref: "#/definitions/ErrorResponse"
   /lp-report:
     post:
       tags:
@@ -435,56 +150,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                  success:
-                    type: boolean
-                  error:
-                    type: boolean
-                  data:
-                    type: object
-                    properties:
-                      lab_duration:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            lpId:
-                              type: string
-                            learning_path_name:
-                              type: string
-                            lab_duration:
-                              type: number
-                              format: float
-                      vid_duration:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            lpId:
-                              type: string
-                            learning_path_name:
-                              type: string
-                            vid_duration:
-                              type: number
-                              format: float
+                $ref: "#/definitions/LPRReportResponse"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: boolean
-                    example: true
-                  message:
-                    type: object
+                $ref: "#/definitions/ErrorResponse"
   /lp-completed-report:
     post:
       tags:
@@ -496,40 +168,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                  success:
-                    type: boolean
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        completed_count:
-                          type: number
-                          format: float
-                        lp:
-                          type: string
-                        learning_path_name:
-                          type: string
-                          nullable: true
+                $ref: "#/definitions/LPCompletedReportResponse"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: boolean
-                    example: true
-                  message:
-                    type: object
+                $ref: "#/definitions/ErrorResponse"
   /journey-report:
     post:
       tags:
@@ -540,66 +185,20 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                skip:
-                  type: integer
-                  description: Number of records to skip.
-                limit:
-                  type: integer
-                  description: Maximum number of records to return.
+              $ref: "#/definitions/JourneyReportRequest"
       responses:
         "200":
           description: Successful response
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        journey_id:
-                          type: string
-                        enroll_count:
-                          type: integer
-                        journey:
-                          type: object
-                          properties:
-                            proficiency:
-                              type: string
-                            sk:
-                              type: string
-                            description:
-                              type: string
-                            logo:
-                              type: string
-                              format: url
-                            duration:
-                              type: integer
-                            name:
-                              type: string
-                  error:
-                    type: boolean
+                $ref: "#/definitions/JourneyReportResponse"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: boolean
-                    example: true
-                  message:
-                    type: object
+                $ref: "#/definitions/ErrorResponse"
   /user-activity:
     post:
       tags:
@@ -610,47 +209,20 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                user_id:
-                  type: string
-                  format: email
-                  description: User's email address.
+              $ref: "#/definitions/UserActivityRequest"
       responses:
         "200":
           description: Successful response
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        activity:
-                          type: integer
-                        date:
-                          type: string
-                          format: date
+                $ref: "#/definitions/UserActivityResponse"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: boolean
-                    example: true
-                  message:
-                    type: object
+                $ref: "#/definitions/ErrorResponse"
   /individual-journey-report:
     post:
       tags:
@@ -661,133 +233,20 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: Journey ID
-                skip:
-                  type: integer
-                  description: Number of records to skip
-                limit:
-                  type: integer
-                  description: Maximum number of records to return
+              $ref: "#/definitions/IndividualJourneyReportRequest"
       responses:
         "200":
           description: Successful response
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      ttl:
-                        type: integer
-                      search_name:
-                        type: string
-                      logo:
-                        type: string
-                        format: url
-                      name:
-                        type: string
-                      active:
-                        type: boolean
-                      roles:
-                        type: array
-                        items:
-                          type: string
-                      events:
-                        type: array
-                        items:
-                          type: string
-                      delivery_id:
-                        type: string
-                      proficiency:
-                        type: string
-                      sk:
-                        type: string
-                      description:
-                        type: string
-                      pk:
-                        type: string
-                      duration:
-                        type: integer
-                      created_on:
-                        type: string
-                        format: date-time
-                      report:
-                        type: object
-                        properties:
-                          avg_user_progress:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                email:
-                                  type: string
-                                  format: email
-                                avg_progress:
-                                  type: number
-                                  format: float
-                                first_name:
-                                  type: string
-                                last_name:
-                                  type: string
-                          avg_progress:
-                            type: number
-                            format: float
-                          avg_course_progress:
-                            type: object
-                            additionalProperties:
-                              type: number
-                              format: float
-                          completed:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                email:
-                                  type: string
-                                  format: email
-                                completed_courses:
-                                  type: integer
-                                first_name:
-                                  type: string
-                                last_name:
-                                  type: string
-                      skills:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            date:
-                              type: string
-                              format: date
-                            topTag:
-                              type: string
-                            count:
-                              type: integer
-                  success:
-                    type: boolean
-                  error:
-                    type: boolean
+                $ref: "#/definitions/IndividualJourneyReportResponse"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: boolean
-                    example: true
-                  message:
-                    type: object
+                $ref: "#/definitions/ErrorResponse"
   /top-users:
     post:
       tags:
@@ -798,51 +257,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                select:
-                  type: string
-                  enum: [overall, monthly]
-                  description: Select top users overall or monthly
+              $ref: "#/definitions/TopUsersRequest"
       responses:
         "200":
           description: Successful response
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  data:
-                    type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            first_name:
-                              type: string
-                            last_name:
-                              type: string
-                            lab_minutes:
-                              type: number
-                              nullable: true
-                            assignments_completed:
-                              type: integer
-                              nullable: true
-                            course_minutes:
-                              type: integer
-                            email:
-                              type: string
-                            challenge_completed:
-                              type: integer
-                              nullable: true
-                      badges:
-                        type: integer
-                      total:
-                        type: integer
+                $ref: "#/definitions/TopUsersResponse"
   /user-report:
     post:
       tags:
@@ -853,51 +275,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                user_id:
-                  type: string
-                  format: email
-                  description: User email
+              $ref: "#/definitions/UserReportRequest"
       responses:
         "200":
           description: Successful response
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  challenges_completed:
-                    type: integer
-                  labs_completed:
-                    type: number
-                  videos_completed:
-                    type: number
-                  badges:
-                    type: number
-                  total_enrolled:
-                    type: integer
-                  dashboard:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        activity:
-                          type: integer
-                        date:
-                          type: string
-                          format: date
-                  total_lab_mins:
-                    type: number
-                  total_course_mins:
-                    type: number
-                  total_course_minutes:
-                    type: number
-                  month_lab_minutes:
-                    type: integer
-                  total_lab_minutes:
-                    type: number
-
+                $ref: "#/definitions/UserReportResponse"
   /pet/{petId}/uploadImage:
     post:
       tags:
@@ -1034,9 +419,7 @@ paths:
       tags:
         - "pet"
       summary: "Finds Pets by tags"
-      description:
-        "Multiple tags can be provided with comma separated strings. Use\
-        \ tag1, tag2, tag3 for testing."
+      description: "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing."
       operationId: "findPetsByTags"
       produces:
         - "application/json"
@@ -1187,9 +570,7 @@ paths:
       tags:
         - "store"
       summary: "Find purchase order by ID"
-      description:
-        "For valid response try integer IDs with value >= 1 and <= 10.\
-        \ Other values will generated exceptions"
+      description: "For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions"
       operationId: "getOrderById"
       produces:
         - "application/json"
@@ -1216,9 +597,7 @@ paths:
       tags:
         - "store"
       summary: "Delete purchase order by ID"
-      description:
-        "For valid response try integer IDs with positive integer value.\
-        \ Negative or non-integer values will generate API errors"
+      description: "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors"
       operationId: "deleteOrder"
       produces:
         - "application/json"
@@ -1582,6 +961,239 @@ definitions:
         description: "User Status"
     xml:
       name: "User"
-externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
+  UserCompletedCoursesRequest:
+    type: "object"
+    properties:
+      user_id:
+        type: "string"
+        example: "olaniyi.ajayi@we45.com"
+  UserCompletedCoursesResponse:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      error:
+        type: "boolean"
+      data:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            event_name:
+              type: "string"
+            sk:
+              type: "string"
+            vid_duration:
+              type: "number"
+              format: "float"
+            lab_duration:
+              type: "number"
+              format: "float"
+      assignments:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            sk:
+              type: "string"
+            end_date:
+              type: "string"
+              format: "date"
+            name:
+              type: "string"
+            start_date:
+              type: "string"
+              format: "date"
+  UserActiveCoursesRequest:
+    type: "object"
+    properties:
+      user_id:
+        type: "string"
+        example: "olaniyi.ajayi@we45.com"
+  UserActiveCoursesResponse:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      error:
+        type: "boolean"
+      data:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            event_name:
+              type: "string"
+            sk:
+              type: "string"
+            vid_duration:
+              type: "number"
+              format: "float"
+            lab_duration:
+              type: "number"
+              format: "float"
+      assignments:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            sk:
+              type: "string"
+            end_date:
+              type: "string"
+              format: "date"
+            name:
+              type: "string"
+            start_date:
+              type: "string"
+              format: "date"
+  CompanyStatsRequest:
+    type: "object"
+    properties:
+      user_id:
+        type: "string"
+        example: "olaniyi.ajayi@we45.com"
+  CompanyStatsResponse:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      data:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            first_name:
+              type: "string"
+            last_name:
+              type: "string"
+            video_count:
+              type: "integer"
+            lab_count:
+              type: "integer"
+            media_count:
+              type: "integer"
+            quiz_count:
+              type: "integer"
+            email:
+              type: "string"
+  TeamStatsRequest:
+    type: "object"
+    properties:
+      team_id:
+        type: "string"
+        example: "team_062c0918-e7eb-40e0-af3b-ecdca8b91f9f"
+      select:
+        type: "string"
+        example: "overall"
+  TeamStatsResponse:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      data:
+        type: "object"
+        properties:
+          activity:
+            type: "array"
+            items:
+              type: "object"
+              properties:
+                activity:
+                  type: "integer"
+                date:
+                  type: "string"
+                  format: "date"
+          progress:
+            type: "array"
+            items:
+              type: "object"
+              properties:
+                course:
+                  type: "string"
+                averageProgress:
+                  type: "number"
+                  format: "float"
+                duration:
+                  type: "number"
+                  format: "float"
+          assignments:
+            type: "array"
+            items:
+              type: "object"
+          assign_completed:
+            type: "array"
+            items:
+              type: "object"
+              properties:
+                assign:
+                  type: "object"
+                  properties:
+                    sk:
+                      type: "string"
+                    end_date:
+                      type: "string"
+                      format: "date"
+                    name:
+                      type: "string"
+                    start_date:
+                      type: "string"
+                      format: "date"
+                users:
+                  type: "array"
+                  items:
+                    type: "string"
+          stat:
+            type: "object"
+            properties:
+              assignments_completed:
+                type: "number"
+                format: "float"
+              badges:
+                type: "integer"
+              challenges_completed:
+                type: "number"
+                format: "float"
+              doc_type:
+                type: "string"
+              enrolled:
+                type: "number"
+                format: "float"
+              lab_minutes:
+                type: "number"
+                format: "float"
+              labs_completed:
+                type: "number"
+                format: "float"
+              video_minutes:
+                type: "number"
+                format: "float"
+              videos_completed:
+                type: "number"
+                format: "float"
+          recent:
+            type: "array"
+            items:
+              type: "object"
+              properties:
+                activity:
+                  type: "string"
+                item:
+                  type: "string"
+                date:
+                  type: "string"
+          items:
+            type: "array"
+            items:
+              type: "object"
+              properties:
+                first_name:
+                  type: "string"
+                last_name:
+                  type: "string"
+                lab_minutes:
+                  type: "number"
+                  format: "float"
+                course_minutes:
+                  type: "number"
+                  format: "float
