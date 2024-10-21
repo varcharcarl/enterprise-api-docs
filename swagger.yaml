@@ -35,6 +35,8 @@ schemes:
 paths:
   /user-completed-courses:
     post:
+      tags:
+        - report
       summary: Get completed courses and assignments by user ID
       consumes:
         - "application/json"
@@ -188,6 +190,85 @@ paths:
           description: Internal Server Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+
+  /journey-report:
+    post:
+      tags:
+        - report
+      summary: Get journey report
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Journey report request body"
+          required: true
+          schema:
+            $ref: "#/definitions/LearningJourneyInput"
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/LearningJourneyReportResponse"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /user-activity:
+    post:
+      tags:
+        - report
+      summary: Get user activity
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User activity request body"
+          required: true
+          schema:
+            $ref: "#/definitions/UserActiveCoursesRequest"
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/UserActivityReport"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /user-report:
+    post:
+      tags:
+        - report
+      summary: Get user report
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User report request body"
+          required: true
+          schema:
+            $ref: "#/definitions/UserCompletedCoursesRequest"
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/UserReport"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
 securityDefinitions:
   api_key:
     type: "apiKey"
@@ -679,7 +760,97 @@ definitions:
               type: string
             learning_path_name:
               type: string
-              nullable: true
+
+  LearningJourneyInput:
+    type: object
+    properties:
+      skip:
+        type: integer
+        description: Number of records to skip.
+      limit:
+        type: integer
+        description: Maximum number of records to return.
+  LearningJourneyOutput:
+    type: object
+    properties:
+      success:
+        type: boolean
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            journey_id:
+              type: string
+            enroll_count:
+              type: integer
+            journey:
+              type: object
+              properties:
+                proficiency:
+                  type: string
+                sk:
+                  type: string
+                description:
+                  type: string
+                logo:
+                  type: string
+                  format: url
+                duration:
+                  type: integer
+                name:
+                  type: string
+
+  UserActivityReport:
+    type: object
+    properties:
+      success:
+        type: boolean
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            activity:
+              type: integer
+            date:
+              type: string
+              format: date
+
+  UserReport:
+    type: object
+    properties:
+      challenges_completed:
+        type: integer
+      labs_completed:
+        type: number
+      videos_completed:
+        type: number
+      badges:
+        type: number
+      total_enrolled:
+        type: integer
+      dashboard:
+        type: array
+        items:
+          type: object
+          properties:
+            activity:
+              type: integer
+            date:
+              type: string
+              format: date
+      total_lab_mins:
+        type: number
+      total_course_mins:
+        type: number
+      total_course_minutes:
+        type: number
+      month_lab_minutes:
+        type: integer
+      total_lab_minutes:
+        type: number
+
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"
