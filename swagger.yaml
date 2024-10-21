@@ -269,56 +269,56 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-  # /individual-journey-report:
-  #   post:
-  #     tags:
-  #       - report
-  #     summary: Get individual journey report
-  #     consumes:
-  #       - "application/json"
-  #     produces:
-  #       - "application/json"
-  #     parameters:
-  #       - in: "body"
-  #         name: "body"
-  #         description: "Individual journey report request body"
-  #         required: true
-  #         schema:
-  #           $ref: "#/definitions/IndividualJourneyInput"
-  #     responses:
-  #       200:
-  #         description: Successful response
-  #         schema:
-  #           $ref: "#/definitions/IndividualJourneyOutput"
-  #       500:
-  #         description: Internal Server Error
-  #         schema:
-  #           $ref: "#/definitions/ErrorResponse"
-  # /top-users:
-  #   post:
-  #     tags:
-  #       - report
-  #     summary: Get top users (overall or monthly)
-  #     consumes:
-  #       - "application/json"
-  #     produces:
-  #       - "application/json"
-  #     parameters:
-  #       - in: "body"
-  #         name: "body"
-  #         description: "Top users report request body"
-  #         required: true
-  #         schema:
-  #           $ref: "#/definitions/UserCompletedCoursesRequest"
-  #     responses:
-  #       200:
-  #         description: Successful response
-  #         schema:
-  #           $ref: "#/definitions/TopUsersResponse"
-  #       500:
-  #         description: Internal Server Error
-  #         schema:
-  #           $ref: "#/definitions/ErrorResponse"
+  /individual-journey-report:
+    post:
+      tags:
+        - report
+      summary: Get individual journey report
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Individual journey report request body"
+          required: true
+          schema:
+            $ref: "#/definitions/IndividualJourneyInput"
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/IndividualJourneyOutput"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /top-users:
+    post:
+      tags:
+        - report
+      summary: Get top users (overall or monthly)
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Top users report request body"
+          required: true
+          schema:
+            $ref: "#/definitions/UserCompletedCoursesRequest"
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/TopUsersResponse"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
 
 securityDefinitions:
@@ -1018,17 +1018,14 @@ definitions:
                   type: string
                 lab_minutes:
                   type: number
-                  nullable: true
                 assignments_completed:
                   type: integer
-                  nullable: true
                 course_minutes:
                   type: integer
                 email:
                   type: string
                 challenge_completed:
                   type: integer
-                  nullable: true
           badges:
             type: integer
           total:
