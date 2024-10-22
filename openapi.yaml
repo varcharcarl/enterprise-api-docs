@@ -484,6 +484,46 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
+  /list-teams:
+    post:
+      tags:
+        - report
+      summary: List all teams for a customer
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Optional pagination model for listing teams"
+          required: false
+          schema:
+            $ref: "#/definitions/PaginationModel"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/ListTeamsResponse"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: Validation Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
 definitions:
   UserCompletedCoursesRequest:
     type: "object"
@@ -1037,6 +1077,7 @@ definitions:
     properties:
       success:
         type: boolean
+        example: true
       data:
         type: object
         properties:
@@ -1047,22 +1088,169 @@ definitions:
               properties:
                 first_name:
                   type: string
+                  example: "John"
                 last_name:
                   type: string
+                  example: "Doe"
                 lab_minutes:
                   type: number
+                  example: 100
                 assignments_completed:
                   type: integer
+                  example: 5
                 course_minutes:
                   type: integer
+                  example: 200
                 email:
                   type: string
+                  example: "john.doe@example.com"
                 challenge_completed:
                   type: integer
+                  example: 2
           badges:
             type: integer
+            example: 10
           total:
             type: integer
+            example: 100
+    example:
+      success: true
+      data:
+        data:
+          - first_name: User1
+            last_name: User1
+            lab_minutes: 100
+            assignments_completed: 5
+            course_minutes: 200
+            email: user1@example.com
+            challenge_completed: 2
+          - first_name: User2
+            last_name: User2
+            lab_minutes: 150
+            assignments_completed: 10
+            course_minutes: 250
+            email: user2@example.com
+            challenge_completed: 7
+        badges: 10
+        total: 100
+
+  PaginationModel:
+    type: object
+    properties:
+      pk:
+        type: string
+      sk:
+        type: string
+
+  ListTeamsResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+        example: true
+      error:
+        type: boolean
+        example: false
+      data:
+        type: object
+        properties:
+          Items:
+            type: array
+            items:
+              type: object
+              properties:
+                stat:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      lp:
+                        type: string
+                      duration:
+                        type: integer
+                      percentage:
+                        type: number
+                        format: float
+                team_name:
+                  type: string
+                sk:
+                  type: string
+                search_name:
+                  type: string
+                pk:
+                  type: string
+                created_on:
+                  type: string
+                  format: date-time
+                lab_minutes:
+                  type: number
+                  format: float
+                video_minutes:
+                  type: number
+                  format: float
+    example:
+      success: true
+      error: false
+      data:
+        Items:
+          - stat:
+              - lp: "AWS Security"
+                duration: 1106
+                percentage: 19.56
+              - lp: "Application Security"
+                duration: 1025
+                percentage: 18.13
+              - lp: "Advanced Application Security"
+                duration: 1054
+                percentage: 18.64
+              - lp: "DevSecOps"
+                duration: 989
+                percentage: 17.49
+              - lp: "Azure Security"
+                duration: 219
+                percentage: 3.87
+              - lp: "Kubernetes Security"
+                duration: 1196
+                percentage: 21.15
+              - lp: "Threat Modeling"
+                duration: 66
+                percentage: 1.17
+            team_name: "team Alpha"
+            sk: "team_2dd61b4c-46f5-487e-8ba0-ff00f69fcb15"
+            search_name: "team alpha"
+            pk: "team#company_4923834b-81d4-4b2a-830c-d5e4382d4e89"
+            created_on: "2024-09-04T07:45:07.976470"
+            lab_minutes: 1940.0
+            video_minutes: 3711.0
+          - stat:
+              - lp: "AWS Security"
+                duration: 1237
+                percentage: 23.31
+              - lp: "Application Security"
+                duration: 678
+                percentage: 12.78
+              - lp: "Advanced Application Security"
+                duration: 1074
+                percentage: 20.24
+              - lp: "DevSecOps"
+                duration: 706
+                percentage: 13.31
+              - lp: "Azure Security"
+                duration: 271
+                percentage: 5.11
+              - lp: "Kubernetes Security"
+                duration: 1185
+                percentage: 22.33
+              - lp: "Threat Modeling"
+                duration: 155
+                percentage: 2.92
+            team_name: "Team Appsec"
+            sk: "team_32176c13-3fad-4925-9680-b83d8af1b6f8"
+            search_name: "team appsec"
+            pk: "team#company_4923834b-81d4-4b2a-830c-d5e4382d4e89"
+            created_on: "2024-07-29T11:16:28.388513"
+            lab_minutes: 2655.0
+            video_minutes: 2647.0
 
 externalDocs:
   description: "Find out more about AppSecEngineer"
