@@ -1,10 +1,7 @@
 ---
 swagger: "2.0"
 info:
-  description:
-    "This is AppsecEngineer Enterprise API server console.  You can find out more about\
-    \  For this sample, you can use the api key `special-key` to test the authorization\
-    \ filters."
+  description: "This is AppsecEngineer Enterprise API server console."
   version: "1.0.7"
   title: "AppSecEngineer Enterprise API"
   termsOfService: "https://appsecengineer.com/tos"
@@ -14,7 +11,7 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "l3q3g5e1xa.execute-api.us-east-2.amazonaws.com"
-basePath: "/staging"
+basePath: "/staging/report"
 tags:
   - name: "report"
     description: "All the reports endpoint"
@@ -25,7 +22,7 @@ tags:
 schemes:
   - "https"
 paths:
-  /user-completed-courses:
+  /completed-courses:
     post:
       tags:
         - report
@@ -65,7 +62,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-  /user-active-courses:
+  /active-courses:
     post:
       tags:
         - report
@@ -98,6 +95,10 @@ paths:
             $ref: "#/definitions/UserActiveCoursesResponse"
         500:
           description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: "Validation Error"
           schema:
             $ref: "#/definitions/ErrorResponse"
 
@@ -136,6 +137,10 @@ paths:
           description: Internal Server Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+        400:
+          description: "Validation Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
   /team-stats:
     post:
@@ -172,6 +177,11 @@ paths:
           description: Internal Server Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+        400:
+          description: "Validation Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
   /proficiency-report:
     post:
       tags:
@@ -199,6 +209,10 @@ paths:
             $ref: "#/definitions/ProficiencyReportResponse"
         500:
           description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: "Validation Error"
           schema:
             $ref: "#/definitions/ErrorResponse"
 
@@ -231,6 +245,10 @@ paths:
           description: Internal Server Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+        400:
+          description: "Validation Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
   /lp-completed-report:
     post:
@@ -259,6 +277,10 @@ paths:
             $ref: "#/definitions/LPCompletedReportResponse"
         500:
           description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: "Validation Error"
           schema:
             $ref: "#/definitions/ErrorResponse"
 
@@ -297,6 +319,10 @@ paths:
           description: Internal Server Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+        400:
+          description: "Validation Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
   /user-activity:
     post:
@@ -331,6 +357,10 @@ paths:
             $ref: "#/definitions/UserActivityReport"
         500:
           description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: Validation Error
           schema:
             $ref: "#/definitions/ErrorResponse"
 
@@ -369,6 +399,10 @@ paths:
           description: Internal Server Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+        400:
+          description: Validation Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
   /individual-journey-report:
     post:
@@ -405,6 +439,11 @@ paths:
           description: Internal Server Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+        400:
+          description: Validation Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
   /top-users:
     post:
       tags:
@@ -438,6 +477,10 @@ paths:
             $ref: "#/definitions/TopUsersResponse"
         500:
           description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: Validation Error
           schema:
             $ref: "#/definitions/ErrorResponse"
 
