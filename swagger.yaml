@@ -490,7 +490,7 @@ definitions:
     properties:
       user_id:
         type: "string"
-        example: "olaniyi.ajayi@we45.com"
+        example: "john@doe.com"
 
   UserCompletedCoursesResponse:
     type: "object"
@@ -545,7 +545,7 @@ definitions:
     properties:
       user_id:
         type: "string"
-        example: "olaniyi.ajayi@we45.com"
+        example: "john@doe.com"
 
   UserActiveCoursesResponse:
     type: "object"
@@ -590,7 +590,7 @@ definitions:
     properties:
       user_id:
         type: "string"
-        example: "olaniyi.ajayi@we45.com"
+        example: "john@doe.com"
 
   CompanyStatsResponse:
     type: "object"
