@@ -2,36 +2,28 @@
 swagger: "2.0"
 info:
   description:
-    "This is a sample server Petstore server.  You can find out more about\
-    \ Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).\
+    "This is AppsecEngineer Enterprise API server console.  You can find out more about\
     \  For this sample, you can use the api key `special-key` to test the authorization\
     \ filters."
   version: "1.0.7"
-  title: "Swagger Petstore"
-  termsOfService: "http://swagger.io/terms/"
+  title: "AppSecEngineer Enterprise API"
+  termsOfService: "https://appsecengineer.com/tos"
   contact:
-    email: "apiteam@swagger.io"
+    email: "support@appsecengineer.com"
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "petstore.swagger.io"
-basePath: "/v2"
+host: "l3q3g5e1xa.execute-api.us-east-2.amazonaws.com"
+basePath: "/staging"
 tags:
-  - name: "pet"
-    description: "Everything about your Pets"
+  - name: "report"
+    description: "All the reports endpoint"
     externalDocs:
       description: "Find out more"
-      url: "http://swagger.io"
-  - name: "store"
-    description: "Access to Petstore orders"
-  - name: "user"
-    description: "Operations about user"
-    externalDocs:
-      description: "Find out more about our store"
-      url: "http://swagger.io"
+      url: "https://appsecengineer.com"
+
 schemes:
   - "https"
-  - "http"
 paths:
   /user-completed-courses:
     post:
@@ -49,6 +41,16 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/UserCompletedCoursesRequest"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
       responses:
         200:
           description: Successful response
@@ -58,6 +60,11 @@ paths:
           description: "Internal Server Error"
           schema:
             $ref: "#/definitions/ErrorResponse"
+        400:
+          description: "Validation Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
   /user-active-courses:
     post:
       tags:
@@ -74,6 +81,16 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/UserActiveCoursesRequest"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
       responses:
         200:
           description: Successful response
@@ -100,6 +117,16 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/CompanyStatsRequest"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
       responses:
         200:
           description: Successful response
@@ -126,6 +153,16 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/TeamStatsRequest"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
       responses:
         200:
           description: Successful response
@@ -144,6 +181,17 @@ paths:
         - "application/json"
       produces:
         - "application/json"
+      parameters:
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
       responses:
         200:
           description: Successful response
@@ -153,6 +201,7 @@ paths:
           description: Internal Server Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+
   /lp-report:
     post:
       tags:
@@ -162,6 +211,17 @@ paths:
         - "application/json"
       produces:
         - "application/json"
+      parameters:
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
       responses:
         200:
           description: Successful response
@@ -181,6 +241,17 @@ paths:
         - "application/json"
       produces:
         - "application/json"
+      parameters:
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
       responses:
         200:
           description: Successful response
@@ -207,6 +278,16 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/LearningJourneyInput"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
       responses:
         200:
           description: Successful response
@@ -233,6 +314,16 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/UserActiveCoursesRequest"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
       responses:
         200:
           description: Successful response
@@ -259,9 +350,21 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/UserCompletedCoursesRequest"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
       responses:
         200:
           description: Successful response
+          schema:
+            $ref: "#/definitions/UserReport"
         500:
           description: Internal Server Error
           schema:
@@ -283,6 +386,16 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/IndividualJourneyInput"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
       responses:
         200:
           description: Successful response
@@ -308,6 +421,16 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/UserCompletedCoursesRequest"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
       responses:
         200:
           description: Successful response
@@ -318,138 +441,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-securityDefinitions:
-  api_key:
-    type: "apiKey"
-    name: "api_key"
-    in: "header"
-  petstore_auth:
-    type: "oauth2"
-    authorizationUrl: "https://petstore.swagger.io/oauth/authorize"
-    flow: "implicit"
-    scopes:
-      read:pets: "read your pets"
-      write:pets: "modify pets in your account"
 definitions:
-  ApiResponse:
-    type: "object"
-    properties:
-      code:
-        type: "integer"
-        format: "int32"
-      type:
-        type: "string"
-      message:
-        type: "string"
-  Category:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      name:
-        type: "string"
-    xml:
-      name: "Category"
-  Pet:
-    type: "object"
-    required:
-      - "name"
-      - "photoUrls"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      category:
-        $ref: "#/definitions/Category"
-      name:
-        type: "string"
-        example: "doggie"
-      photoUrls:
-        type: "array"
-        xml:
-          wrapped: true
-        items:
-          type: "string"
-          xml:
-            name: "photoUrl"
-      tags:
-        type: "array"
-        xml:
-          wrapped: true
-        items:
-          xml:
-            name: "tag"
-          $ref: "#/definitions/Tag"
-      status:
-        type: "string"
-        description: "pet status in the store"
-        enum:
-          - "available"
-          - "pending"
-          - "sold"
-    xml:
-      name: "Pet"
-  Tag:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      name:
-        type: "string"
-    xml:
-      name: "Tag"
-  Order:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      petId:
-        type: "integer"
-        format: "int64"
-      quantity:
-        type: "integer"
-        format: "int32"
-      shipDate:
-        type: "string"
-        format: "date-time"
-      status:
-        type: "string"
-        description: "Order Status"
-        enum:
-          - "placed"
-          - "approved"
-          - "delivered"
-      complete:
-        type: "boolean"
-    xml:
-      name: "Order"
-  User:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      username:
-        type: "string"
-      firstName:
-        type: "string"
-      lastName:
-        type: "string"
-      email:
-        type: "string"
-      password:
-        type: "string"
-      phone:
-        type: "string"
-      userStatus:
-        type: "integer"
-        format: "int32"
-        description: "User Status"
-    xml:
-      name: "User"
   UserCompletedCoursesRequest:
     type: "object"
     properties:
@@ -845,46 +837,46 @@ definitions:
               type: string
               format: date
 
-  # UserReport:
-  #   type: object
-  #   properties:
-  #     success:
-  #       type: boolean
-  #     error:
-  #       type: boolean
-  #     data:
-  #       type: object
-  #       properties:
-  #         challenges_completed:
-  #           type: integer
-  #         labs_completed:
-  #           type: number
-  #         videos_completed:
-  #           type: number
-  #         badges:
-  #           type: number
-  #         total_enrolled:
-  #           type: integer
-  #         dashboard:
-  #           type: array
-  #           items:
-  #             type: object
-  #             properties:
-  #               activity:
-  #                 type: integer
-  #               date:
-  #                 type: string
-  #                 format: date
-  #         total_lab_mins:
-  #           type: number
-  #         total_course_mins:
-  #           type: number
-  #         total_course_minutes:
-  #           type: number
-  #         month_lab_minutes:
-  #           type: integer
-  #         total_lab_minutes:
-  #           type: number
+  UserReport:
+    type: object
+    properties:
+      success:
+        type: boolean
+      error:
+        type: boolean
+      data:
+        type: object
+        properties:
+          challenges_completed:
+            type: integer
+          labs_completed:
+            type: number
+          videos_completed:
+            type: number
+          badges:
+            type: number
+          total_enrolled:
+            type: integer
+          dashboard:
+            type: array
+            items:
+              type: object
+              properties:
+                activity:
+                  type: integer
+                date:
+                  type: string
+                  format: date
+          total_lab_mins:
+            type: number
+          total_course_mins:
+            type: number
+          total_course_minutes:
+            type: number
+          month_lab_minutes:
+            type: integer
+          total_lab_minutes:
+            type: number
 
   IndividualJourneyInput:
     type: object
@@ -1029,5 +1021,5 @@ definitions:
             type: integer
 
 externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
+  description: "Find out more about AppSecEngineer"
+  url: "https://appsecengineer.com"
