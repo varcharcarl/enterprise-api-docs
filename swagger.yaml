@@ -277,7 +277,7 @@ paths:
           description: "Journey report request body"
           required: true
           schema:
-            $ref: "#/definitions/LearningJourneyInput"
+            $ref: "#/definitions/LearningJourneyRequest"
         - in: "header"
           name: "X-ASE-API-Token"
           type: string
@@ -292,7 +292,7 @@ paths:
         200:
           description: Successful response
           schema:
-            $ref: "#/definitions/LearningJourneyOutput"
+            $ref: "#/definitions/LearningJourneyResponse"
         500:
           description: Internal Server Error
           schema:
@@ -385,7 +385,7 @@ paths:
           description: "Individual journey report request body"
           required: true
           schema:
-            $ref: "#/definitions/IndividualJourneyInput"
+            $ref: "#/definitions/IndividualJourneyRequest"
         - in: "header"
           name: "X-ASE-API-Token"
           type: string
@@ -400,7 +400,7 @@ paths:
         200:
           description: Successful response
           schema:
-            $ref: "#/definitions/IndividualJourneyOutput"
+            $ref: "#/definitions/IndividualJourneyResponse"
         500:
           description: Internal Server Error
           schema:
@@ -760,6 +760,7 @@ definitions:
                 vid_duration:
                   type: number
                   format: float
+
   LPCompletedReportResponse:
     type: object
     properties:
@@ -780,7 +781,7 @@ definitions:
             learning_path_name:
               type: string
 
-  LearningJourneyInput:
+  LearningJourneyRequest:
     type: object
     properties:
       skip:
@@ -790,7 +791,7 @@ definitions:
         type: integer
         description: Maximum number of records to return.
 
-  LearningJourneyOutput:
+  LearningJourneyResponse:
     type: object
     properties:
       success:
@@ -878,7 +879,7 @@ definitions:
           total_lab_minutes:
             type: number
 
-  IndividualJourneyInput:
+  IndividualJourneyRequest:
     type: object
     properties:
       id:
@@ -891,7 +892,7 @@ definitions:
         type: integer
         description: Maximum number of records to return
 
-  IndividualJourneyOutput:
+  IndividualJourneyResponse:
     type: object
     properties:
       data:
