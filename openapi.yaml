@@ -1,0 +1,1069 @@
+---
+swagger: "2.0"
+info:
+  description: "This is AppsecEngineer Enterprise API server console."
+  version: "1.0.7"
+  title: "AppSecEngineer Enterprise API"
+  termsOfService: "https://appsecengineer.com/tos"
+  contact:
+    email: "support@appsecengineer.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "l3q3g5e1xa.execute-api.us-east-2.amazonaws.com"
+basePath: "/staging/report"
+tags:
+  - name: "report"
+    description: "All the reports endpoint"
+    externalDocs:
+      description: "Find out more"
+      url: "https://appsecengineer.com"
+
+schemes:
+  - "https"
+paths:
+  /completed-courses:
+    post:
+      tags:
+        - report
+      summary: Get completed courses and assignments by user ID
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "email of the user for which completed courses should be listed"
+          required: true
+          schema:
+            $ref: "#/definitions/UserCompletedCoursesRequest"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/UserCompletedCoursesResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: "Validation Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /active-courses:
+    post:
+      tags:
+        - report
+      summary: Get active courses and assignments by user ID
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "email of the user for which completed courses should be listed"
+          required: true
+          schema:
+            $ref: "#/definitions/UserActiveCoursesRequest"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/UserActiveCoursesResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: "Validation Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /company-stats:
+    post:
+      tags:
+        - report
+      summary: Get company user statistics by user ID
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Company stats request body"
+          required: true
+          schema:
+            $ref: "#/definitions/CompanyStatsRequest"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/CompanyStatsResponse"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: "Validation Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /team-stats:
+    post:
+      tags:
+        - report
+      summary: Get team statistics
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Team stats request body"
+          required: true
+          schema:
+            $ref: "#/definitions/TeamStatsRequest"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/TeamStatResponse"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: "Validation Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /proficiency-report:
+    post:
+      tags:
+        - report
+      summary: Get proficiency report
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/ProficiencyReportResponse"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: "Validation Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /lp-report:
+    post:
+      tags:
+        - report
+      summary: Get learning path report
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/LPReportResponse"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: "Validation Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /lp-completed-report:
+    post:
+      tags:
+        - report
+      summary: Get learning path completed report
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/LPCompletedReportResponse"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: "Validation Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /journey-report:
+    post:
+      tags:
+        - report
+      summary: Get journey report
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Journey report request body"
+          required: true
+          schema:
+            $ref: "#/definitions/LearningJourneyRequest"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/LearningJourneyResponse"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: "Validation Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /user-activity:
+    post:
+      tags:
+        - report
+      summary: Get user activity
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User activity request body"
+          required: true
+          schema:
+            $ref: "#/definitions/UserActiveCoursesRequest"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/UserActivityReport"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: Validation Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /user-report:
+    post:
+      tags:
+        - report
+      summary: Get user report
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User report request body"
+          required: true
+          schema:
+            $ref: "#/definitions/UserCompletedCoursesRequest"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/UserReport"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: Validation Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /individual-journey-report:
+    post:
+      tags:
+        - report
+      summary: Get individual journey report
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Individual journey report request body"
+          required: true
+          schema:
+            $ref: "#/definitions/IndividualJourneyRequest"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/IndividualJourneyResponse"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: Validation Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /top-users:
+    post:
+      tags:
+        - report
+      summary: Get top users (overall or monthly)
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Top users report request body"
+          required: true
+          schema:
+            $ref: "#/definitions/UserCompletedCoursesRequest"
+        - in: "header"
+          name: "X-ASE-API-Token"
+          type: string
+          format: uuid
+          required: true
+        - in: "header"
+          name: "X-ASE-Customer-ID"
+          type: string
+          format: uuid
+          required: true
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/TopUsersResponse"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        400:
+          description: Validation Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+definitions:
+  UserCompletedCoursesRequest:
+    type: "object"
+    properties:
+      user_id:
+        type: "string"
+        example: "john@doe.com"
+
+  UserCompletedCoursesResponse:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      error:
+        type: "boolean"
+      data:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            event_name:
+              type: "string"
+            sk:
+              type: "string"
+            vid_duration:
+              type: "number"
+              format: "float"
+            lab_duration:
+              type: "number"
+              format: "float"
+      assignments:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            sk:
+              type: "string"
+            end_date:
+              type: "string"
+              format: "date"
+            name:
+              type: "string"
+            start_date:
+              type: "string"
+              format: "date"
+
+  ErrorResponse:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      error:
+        type: "boolean"
+      message:
+        type: "string"
+
+  UserActiveCoursesRequest:
+    type: "object"
+    properties:
+      user_id:
+        type: "string"
+        example: "john@doe.com"
+
+  UserActiveCoursesResponse:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      error:
+        type: "boolean"
+      data:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            event_name:
+              type: "string"
+            sk:
+              type: "string"
+            vid_duration:
+              type: "number"
+              format: "float"
+            lab_duration:
+              type: "number"
+              format: "float"
+      assignments:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            sk:
+              type: "string"
+            end_date:
+              type: "string"
+              format: "date"
+            name:
+              type: "string"
+            start_date:
+              type: "string"
+              format: "date"
+
+  CompanyStatsRequest:
+    type: "object"
+    properties:
+      user_id:
+        type: "string"
+        example: "john@doe.com"
+
+  CompanyStatsResponse:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      data:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            first_name:
+              type: "string"
+            last_name:
+              type: "string"
+            video_count:
+              type: "integer"
+            lab_count:
+              type: "integer"
+            media_count:
+              type: "integer"
+            quiz_count:
+              type: "integer"
+            email:
+              type: "string"
+
+  TeamStatsRequest:
+    type: "object"
+    properties:
+      team_id:
+        type: "string"
+        example: "team_062c0918-e7eb-40e0-af3b-ecdca8b91f9f"
+      select:
+        type: "string"
+        example: "overall"
+
+  ProficiencyReportResponse:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+      success:
+        type: "boolean"
+      data:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            type:
+              type: "string"
+            total_enroll_count:
+              type: "integer"
+            courses:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  event_name:
+                    type: "string"
+                  enroll_count:
+                    type: "integer"
+
+  TeamStatResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+      data:
+        type: object
+        properties:
+          activity:
+            type: array
+            items:
+              type: object
+              properties:
+                activity:
+                  type: integer
+                date:
+                  type: string
+                  format: date
+          progress:
+            type: array
+            items:
+              type: object
+              properties:
+                course:
+                  type: string
+                averageProgress:
+                  type: number
+                  format: float
+                duration:
+                  type: number
+                  format: float
+          assignments:
+            type: array
+            items:
+              type: object
+          assign_completed:
+            type: array
+            items:
+              type: object
+              properties:
+                assign:
+                  type: object
+                  properties:
+                    sk:
+                      type: string
+                    end_date:
+                      type: string
+                      format: date
+                    name:
+                      type: string
+                    start_date:
+                      type: string
+                      format: date
+                users:
+                  type: array
+                  items:
+                    type: string
+          stat:
+            type: object
+            properties:
+              assignments_completed:
+                type: number
+                format: float
+              badges:
+                type: integer
+              challenges_completed:
+                type: number
+                format: float
+              doc_type:
+                type: string
+              enrolled:
+                type: number
+                format: float
+              lab_minutes:
+                type: number
+                format: float
+              labs_completed:
+                type: number
+                format: float
+              video_minutes:
+                type: number
+                format: float
+              videos_completed:
+                type: number
+                format: float
+          recent:
+            type: array
+            items:
+              type: object
+              properties:
+                activity:
+                  type: string
+                item:
+                  type: string
+                date:
+                  type: string
+          items:
+            type: array
+            items:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                lab_minutes:
+                  type: number
+                  format: float
+                course_minutes:
+                  type: number
+                  format: float
+                email:
+                  type: string
+
+  LPReportResponse:
+    type: object
+    properties:
+      message:
+        type: string
+      success:
+        type: boolean
+      error:
+        type: boolean
+      data:
+        type: object
+        properties:
+          lab_duration:
+            type: array
+            items:
+              type: object
+              properties:
+                lpId:
+                  type: string
+                learning_path_name:
+                  type: string
+                lab_duration:
+                  type: number
+                  format: float
+          vid_duration:
+            type: array
+            items:
+              type: object
+              properties:
+                lpId:
+                  type: string
+                learning_path_name:
+                  type: string
+                vid_duration:
+                  type: number
+                  format: float
+
+  LPCompletedReportResponse:
+    type: object
+    properties:
+      message:
+        type: string
+      success:
+        type: boolean
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            completed_count:
+              type: number
+              format: float
+            lp:
+              type: string
+            learning_path_name:
+              type: string
+
+  LearningJourneyRequest:
+    type: object
+    properties:
+      skip:
+        type: integer
+        description: Number of records to skip.
+      limit:
+        type: integer
+        description: Maximum number of records to return.
+
+  LearningJourneyResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            journey_id:
+              type: string
+            enroll_count:
+              type: integer
+            journey:
+              type: object
+              properties:
+                proficiency:
+                  type: string
+                sk:
+                  type: string
+                description:
+                  type: string
+                logo:
+                  type: string
+                  format: url
+                duration:
+                  type: integer
+                name:
+                  type: string
+
+  UserActivityReport:
+    type: object
+    properties:
+      success:
+        type: boolean
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            activity:
+              type: integer
+            date:
+              type: string
+              format: date
+
+  UserReport:
+    type: object
+    properties:
+      success:
+        type: boolean
+      error:
+        type: boolean
+      data:
+        type: object
+        properties:
+          challenges_completed:
+            type: integer
+          labs_completed:
+            type: number
+          videos_completed:
+            type: number
+          badges:
+            type: number
+          total_enrolled:
+            type: integer
+          dashboard:
+            type: array
+            items:
+              type: object
+              properties:
+                activity:
+                  type: integer
+                date:
+                  type: string
+                  format: date
+          total_lab_mins:
+            type: number
+          total_course_mins:
+            type: number
+          total_course_minutes:
+            type: number
+          month_lab_minutes:
+            type: integer
+          total_lab_minutes:
+            type: number
+
+  IndividualJourneyRequest:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Journey ID
+      skip:
+        type: integer
+        description: Number of records to skip
+      limit:
+        type: integer
+        description: Maximum number of records to return
+
+  IndividualJourneyResponse:
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          ttl:
+            type: integer
+          search_name:
+            type: string
+          logo:
+            type: string
+            format: url
+          name:
+            type: string
+          active:
+            type: boolean
+          roles:
+            type: array
+            items:
+              type: string
+          events:
+            type: array
+            items:
+              type: string
+          delivery_id:
+            type: string
+          proficiency:
+            type: string
+          sk:
+            type: string
+          description:
+            type: string
+          pk:
+            type: string
+          duration:
+            type: integer
+          created_on:
+            type: string
+            format: date-time
+          report:
+            type: object
+            properties:
+              avg_user_progress:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                    avg_progress:
+                      type: number
+                      format: float
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+              avg_progress:
+                type: number
+                format: float
+              avg_course_progress:
+                type: object
+                additionalProperties:
+                  type: number
+                  format: float
+              completed:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                    completed_courses:
+                      type: integer
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+          skills:
+            type: array
+            items:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date
+                topTag:
+                  type: string
+                count:
+                  type: integer
+      success:
+        type: boolean
+      error:
+        type: boolean
+
+  TopUsersResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+      data:
+        type: object
+        properties:
+          data:
+            type: array
+            items:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                lab_minutes:
+                  type: number
+                assignments_completed:
+                  type: integer
+                course_minutes:
+                  type: integer
+                email:
+                  type: string
+                challenge_completed:
+                  type: integer
+          badges:
+            type: integer
+          total:
+            type: integer
+
+externalDocs:
+  description: "Find out more about AppSecEngineer"
+  url: "https://appsecengineer.com"
