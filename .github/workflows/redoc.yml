@@ -22,11 +22,11 @@ jobs:
       - name: Update API Host
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
-            sed -i '' 's/^host:.*/host: "api.staging.appsecengineer.com"/' openapi.yaml
+            sed -i 's/^host:.*/host: "api.staging.appsecengineer.com"/' openapi.yaml
           elif [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
-            sed -i '' 's/^host:.*/host: "api.uat.appsecengineer.com"/' openapi.yaml
+            sed -i 's/^host:.*/host: "api.uat.appsecengineer.com"/' openapi.yaml
           else
-            sed -i '' 's/^host:.*/host: "api.appsecengineer.com"/' openapi.yaml
+            sed -i 's/^host:.*/host: "api.appsecengineer.com"/' openapi.yaml
           fi
 
       - name: Install @redocly/cli
